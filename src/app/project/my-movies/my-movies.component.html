@@ -1,0 +1,83 @@
+<ng-container *ngrxLet="currentMovie$ as movie">
+	<ng-container *ngIf="movie">
+		<button pButton label="Clear" (click)="onClear()"></button>
+		<hr />
+		<pre>{{ movie | json }}</pre>
+	</ng-container>
+</ng-container>
+
+<ng-container *ngrxLet="movies$ as movies">
+	<p-table [value]="movies" [columns]="columns">
+		<ng-template pTemplate="caption">
+			<div style="display: flex; justify-content: end; gap: 4px">
+				<button pButton label="All" (click)="onFilter('all')"></button>
+				<button
+					pButton
+					label="Completed"
+					(click)="onFilter('completed')"
+				></button>
+				<button
+					pButton
+					label="Pending"
+					(click)="onFilter('pending')"
+				></button>
+				<button pButton label="Add" (click)="onAdd()"></button>
+			</div>
+		</ng-template>
+		<ng-template pTemplate="header" let-columns>
+			<tr>
+				<th *ngFor="let column of columns">
+					{{ column.header }}
+				</th>
+				<th></th>
+			</tr>
+		</ng-template>
+		<ng-template pTemplate="body" let-movie let-columns="columns">
+			<tr>
+				<td *ngFor="let column of columns">
+					{{ movie[column.field] }}
+				</td>
+				<td>
+					<div style="display: flex; justify-content: end; gap: 4px">
+						<button
+							pButton
+							label="Select"
+							(click)="onSet(movie.id)"
+						></button>
+						<button
+							pButton
+							label="Toggle"
+							(click)="onToggle(movie.id)"
+						></button>
+						<button
+							pButton
+							label="Edit"
+							(click)="onUpdate(movie)"
+						></button>
+						<button
+							pButton
+							label="Delete"
+							(click)="onDelete(movie.id)"
+						></button>
+					</div>
+				</td>
+			</tr>
+		</ng-template>
+		<ng-template pTemplate="footer" let-columns>
+			<tr>
+				<td [colSpan]="columns.length + 1">
+					Total records: {{ movies.length }}
+				</td>
+			</tr>
+		</ng-template>
+		<ng-template pTemplate="emptymessage" let-columns>
+			<tr>
+				<td [colSpan]="columns.length + 1">
+					<div style="display: flex; justify-content: center">
+						EMPTY
+					</div>
+				</td>
+			</tr>
+		</ng-template>
+	</p-table>
+</ng-container>

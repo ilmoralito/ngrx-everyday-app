@@ -1,0 +1,31 @@
+<pre>{{ collection$ | async | json }}</pre>
+
+<button (click)="add()">Add</button>
+
+<nav>
+	<ul>
+		<li>
+			<button (click)="filter('all')">All</button>
+		</li>
+		<li>
+			<button (click)="filter('pending')">Pending</button>
+		</li>
+		<li>
+			<button (click)="filter('done')">Done</button>
+		</li>
+	</ul>
+</nav>
+
+<ul>
+	<li *ngFor="let todo of collection$ | async">
+		<span
+			[ngStyle]="{
+				'text-decoration': todo.done ? 'line-through' : 'none'
+			}"
+			>{{ todo.task }}</span
+		>
+		<button (click)="edit(todo)" [disabled]="todo.done">Edit</button>
+		<button (click)="delete(todo.id)" [disabled]="todo.done">Delete</button>
+		<button (click)="toggle(todo.id)">Toggle</button>
+	</li>
+</ul>

@@ -1,0 +1,21 @@
+<h1>products works!</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit(model)" autocomplete="off">
+	<formly-form
+		[form]="form"
+		[model]="model"
+		[fields]="fields"
+		[options]="options"
+	></formly-form>
+	<button type="submit" [disabled]="form.invalid">Submit</button>
+</form>
+
+<ul>
+	<li *ngFor="let product of products$ | async">
+		<span>{{ product.name }} </span>
+		<div>
+			<button (click)="toggle(product.id)">Toggle</button>
+			<button (click)="delete(product.id)">Delete</button>
+		</div>
+	</li>
+</ul>

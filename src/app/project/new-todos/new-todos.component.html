@@ -1,0 +1,56 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(model)" autocomplete="off">
+	<formly-form
+		[form]="form"
+		[model]="model"
+		[fields]="fields"
+		[options]="options"
+	></formly-form>
+	<button type="submit">Submit</button>
+</form>
+
+<div>
+	<button type="button" (click)="onFilter('all')">All</button>
+	<button type="button" (click)="onFilter('completed')">Completed</button>
+	<button type="button" (click)="onFilter('pending')">Pending</button>
+</div>
+
+<ng-container *ngrxLet="{ todos: todos$, todo: todo$ } as vm$">
+	<app-new-todo-detail [todo]="vm$.todo"></app-new-todo-detail>
+	<p-table [value]="vm$.todos">
+		<ng-template pTemplate="header">
+			<tr>
+				<th>Name</th>
+				<th>Completed</th>
+				<th></th>
+			</tr>
+		</ng-template>
+		<ng-template pTemplate="body" let-todo>
+			<tr>
+				<td>{{ todo.name }}</td>
+				<td>{{ todo.completed }}</td>
+				<td>
+					<div style="display: flex; justify-content: end; gap: 2">
+						<button type="button" (click)="onToggle(todo.id)">
+							Toggle
+						</button>
+						<button type="button" (click)="onEdit(todo.id)">
+							Edit
+						</button>
+						<button type="button" (click)="onDelete(todo.id)">
+							Delete
+						</button>
+					</div>
+				</td>
+			</tr>
+		</ng-template>
+		<ng-template pTemplate="emptymessage">
+			<tr>
+				<td colspan="3">
+					<div style="display: flex; justify-content: center">
+						EMPTY
+					</div>
+				</td>
+			</tr>
+		</ng-template>
+	</p-table>
+</ng-container>

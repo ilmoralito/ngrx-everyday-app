@@ -1,0 +1,6 @@
+<p>auth works!</p>
+
+<form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
+	<formly-form [form]="form" [model]="model" [fields]="fields"></formly-form>
+	<button type="submit" [disabled]="form.invalid">Submit</button>
+</form>

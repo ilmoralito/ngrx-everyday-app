@@ -1,0 +1,29 @@
+<p>projects works!</p>
+
+<ng-container *ngrxLet="project$ as project">
+	<ng-container *ngIf="project">
+		<pre>{{ project | json }}</pre>
+		<button (click)="clear()">Clear</button>
+	</ng-container>
+</ng-container>
+
+<div class="mt-2">
+	<button (click)="add()">Add</button>
+	<button (click)="onFilter('all')">All</button>
+	<button (click)="onFilter('completed')">Completed</button>
+	<button (click)="onFilter('pending')">Pending</button>
+</div>
+
+<ng-container *ngrxLet="projects$ as projects">
+	<ul>
+		<li *ngFor="let project of projects">
+			{{ project.name }} - {{ project.completed }}
+			<div class="flex gap-2">
+				<button (click)="set(project.id)">Set</button>
+				<button (click)="update(project)">Update</button>
+				<button (click)="toggle(project.id)">Toggle</button>
+				<button (click)="delete(project.id)">Delete</button>
+			</div>
+		</li>
+	</ul>
+</ng-container>

@@ -1,0 +1,110 @@
+{
+  "roles": [
+    {
+      "id": "1",
+      "name": "ROLE_ADMIN",
+      "DESCRIPTION": "ROLE_ADMIN"
+    },
+    {
+      "id": "2",
+      "name": "ROLE_USER",
+      "DESCRIPTION": "ROLE_USER"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Product 1"
+    },
+    {
+      "id": "2",
+      "name": "Product 2"
+    },
+    {
+      "id": "3",
+      "name": "Product 3"
+    },
+    {
+      "id": "4",
+      "name": "Product 4"
+    },
+    {
+      "id": "5",
+      "name": "Product 5"
+    },
+    {
+      "id": "6",
+      "name": "Product 6"
+    }
+  ],
+  "repos": [
+    {
+      "id": "1",
+      "name": "Repo 1"
+    },
+    {
+      "id": "2",
+      "name": "Repo 2"
+    },
+    {
+      "id": "3",
+      "name": "Repo 3"
+    }
+  ],
+  "my-movies": [
+    {
+      "id": "1",
+      "name": "Matrix",
+      "description": "SciFi",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "name": "X-men 2",
+      "description": "SciFi",
+      "completed": true
+    },
+    {
+      "id": "3",
+      "name": "Hulk",
+      "description": "SciFi",
+      "completed": true
+    },
+    {
+      "id": "1",
+      "name": "Space oddesy",
+      "description": "SciFi",
+      "completed": false
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Food"
+    },
+    {
+      "id": "2",
+      "name": "Electricity bills"
+    },
+    {
+      "id": "3",
+      "name": "Car repair"
+    },
+    {
+      "id": "c235ab6c-f1e1-438c-940c-eb362480058a",
+      "name": "Coco"
+    },
+    {
+      "id": "fc61a013-2c37-4f0c-bb3a-171c9d77018e",
+      "name": "Hotch"
+    },
+    {
+      "id": "e77ccfd9-365b-479b-9420-1bf97e6a58c1",
+      "name": "Bonita"
+    },
+    {
+      "id": "e4afa077-3772-4533-b78d-45a83ada7c62",
+      "name": "Simbat"
+    }
+  ]
+}

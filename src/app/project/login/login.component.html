@@ -1,0 +1,15 @@
+<ng-container *ngIf="userProfile$ | async as userProfile">
+	<pre>{{ userProfile | json }}</pre>
+
+	<button (click)="logout()">Logout</button>
+</ng-container>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit(model)" autocomplete="off">
+	<formly-form
+		[form]="form"
+		[model]="model"
+		[fields]="fields"
+		[options]="options"
+	></formly-form>
+	<button pButton type="submit" [disabled]="form.invalid">Submit</button>
+</form>

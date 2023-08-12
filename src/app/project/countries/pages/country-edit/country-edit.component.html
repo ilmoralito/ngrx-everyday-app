@@ -1,0 +1,15 @@
+<p>country-edit works!</p>
+
+<pre>{{ country$ | async | json }}</pre>
+
+<ng-container *ngIf="country$ | async as model">
+	<form [formGroup]="form" (ngSubmit)="onSubmit(model)" autocomplete="off">
+		<formly-form
+			[form]="form"
+			[model]="model"
+			[fields]="fields"
+			[options]="options"
+		></formly-form>
+		<button type="submit" [disabled]="form.invalid">Submit</button>
+	</form>
+</ng-container>

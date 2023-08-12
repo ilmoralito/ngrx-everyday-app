@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(model)" autocomplete="off">
+	<formly-form [form]="form" [model]="model" [fields]="fields"></formly-form>
+	<button type="submit">Submit</button>
+</form>
+
+<p-table
+	[columns]="columns"
+	[value]="animes"
+	[lazy]="true"
+	(onLazyLoad)="onLazyLoad($event)"
+	[paginator]="true"
+	[rows]="10"
+	[totalRecords]="animes.length"
+	[loading]="loading"
+>
+	<ng-template pTemplate="header" let-columns>
+		<tr>
+			<th *ngFor="let column of columns" [pSortableColumn]="column.field">
+				{{ column.header }}
+				<p-sortIcon [field]="column.field"></p-sortIcon>
+			</th>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-anime let-columns="columns">
+		<tr>
+			<td *ngFor="let column of columns">
+				{{ anime[column.field] }}
+			</td>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="emptymessage" let-columns>
+		<tr>
+			<td [colSpan]="columns.length">
+				<div style="display: flex; justify-content: center">EMPTY</div>
+			</td>
+		</tr>
+	</ng-template>
+</p-table>

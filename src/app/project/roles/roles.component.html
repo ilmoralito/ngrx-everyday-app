@@ -1,0 +1,35 @@
+<pre>{{ repos$ | async | json }}</pre>
+
+<button pButton routerLink="create">Create</button>
+
+<ng-container *ngIf="collection$ | async as data">
+	<p-table
+		[value]="data"
+		[columns]="columns"
+		[tableStyle]="{ 'min-width': '50rem' }"
+	>
+		<ng-template pTemplate="header" let-columns>
+			<tr>
+				<th *ngFor="let column of columns">
+					{{ column.header }}
+				</th>
+				<th></th>
+			</tr>
+		</ng-template>
+		<ng-template
+			pTemplate="body"
+			let-role
+			let-columns="columns"
+		>
+			<tr>
+				<td *ngFor="let column of columns">
+					{{role[column.field]}}
+				</td>
+				<td>
+					<button pButton label="Edit">Edit</button>
+					<button pButton label="Delete">Delete</button>
+				</td>
+			</tr>
+		</ng-template>
+	</p-table>
+</ng-container>

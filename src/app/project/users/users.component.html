@@ -1,0 +1,21 @@
+<h2>Users</h2>
+
+<button (click)="onAdd()">Add user</button>
+
+<ul>
+	<li *ngFor="let user of users$ | async">
+		<span>{{ user.firstName }} {{ user.lastName }}</span>
+		<div>
+			<button (click)="onSelect(user.id)">Select</button>
+			<button (click)="onUpdate(user)">Update</button>
+			<button (click)="onDelete(user.id)">Delete</button>
+		</div>
+	</li>
+</ul>
+
+<ng-container *ngIf="currentUser$ | async as user">
+	<span>{{ user | json }}</span>
+	<div>
+		<button (click)="onClear()">Clear</button>
+	</div>
+</ng-container>

@@ -1,0 +1,10 @@
+<button (click)="onAdd()">Add</button>
+
+<ng-container *ngrxLet="categories$ as categories">
+	<ul>
+		<li *ngFor="let category of categories">
+			{{ category.name }}
+			<div><button (click)="onDelete(category.id)">Delete</button></div>
+		</li>
+	</ul>
+</ng-container>
