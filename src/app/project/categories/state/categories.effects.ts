@@ -68,7 +68,7 @@ export class CategoriesEffects {
 		),
 	);
 
-	handleSuccessMessage = createEffect(
+	handleSuccessMessage$ = createEffect(
 		() =>
 			this.actions$.pipe(
 				ofType(
