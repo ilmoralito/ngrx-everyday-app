@@ -1,0 +1,91 @@
+<h4 appMyHighlight>Lorem ipsum dolor sit amet consectetur.</h4>
+<h1 appFirst>Welcome</h1>
+<h2 appShadow="hotpink" appShadowX="12px" appShadowY="6px" appShadowBlur="30px">
+    Welcome
+</h2>
+<h3 appFirst>Welcome</h3>
+
+<h4 *appThree>THREE</h4>
+
+<fieldset>
+    <legend>lorem</legend>
+    <h5 appFour>abigail</h5>
+</fieldset>
+
+<div class="card my-2">
+    <div class="card-body flex gap-2">
+        <button pButton appTrack="one">One</button>
+        <button pButton appTrack="two">Two</button>
+        <button pButton appTrack="three">Three</button>
+    </div>
+</div>
+
+<div>
+    <app-basic
+        [appFirst]="'nami'"
+        [message]="'Welcome to the jungle!'"
+    ></app-basic>
+</div>
+
+<p appTest>Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Eos.</p>
+
+<p appHighlight="green">Lorem ipsum dolor sit.</p>
+
+<button appCy="confirm">Click me</button>
+
+<button appLight defaultValue="Gokuuuu" class="naim">Another button</button>
+
+<hr />
+
+<pre>{{ model | json }}</pre>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <formly-form
+        [form]="form"
+        [model]="model"
+        [fields]="fields"
+        [options]="options"
+    ></formly-form>
+    <button type="submit">Submit</button>
+</form>
+
+<pre>{{ collection$ | async | json }}</pre>
+
+<button appOpt (toggle)="onToggle($event)">Toggle</button>
+
+<hr />
+
+<pre>{{ selectedPerson | json }}</pre>
+<app-staff-detail [person]="selectedPerson"></app-staff-detail>
+
+<p-table
+    [columns]="columns"
+    [value]="people"
+    [tableStyle]="{ 'min-width': '50rem' }"
+>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{ col.header }}
+            </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template
+        pTemplate="body"
+        let-person
+        let-rowIndex="rowIndex"
+        let-columns="columns"
+    >
+        <tr>
+            <td *ngFor="let col of columns">
+                {{ person[col.field] }}
+            </td>
+            <td>
+                <button (click)="onEdit(person)">
+                    Select {{ rowIndex | json }}
+                </button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

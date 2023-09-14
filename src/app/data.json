@@ -105,6 +105,24 @@
     {
       "id": "c491c0b2-ebfa-4027-a35b-c15b6dfb7ca5",
       "name": "Simbat"
+    },
+    {
+      "id": "605ff37d-e6ed-4750-8dd4-8eeba97dc01c",
+      "name": "Simbat"
+    }
+  ],
+  "staff": [
+    {
+      "id": "1",
+      "firstName": "Ada",
+      "lastName": "Wong",
+      "email": "ada.wong@domain.com"
+    },
+    {
+      "id": "2",
+      "firstName": "Leon",
+      "lastName": "Kenedy",
+      "email": "leon.kenedy@domain.com"
     }
   ]
 }

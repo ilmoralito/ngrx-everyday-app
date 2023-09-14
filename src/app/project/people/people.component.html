@@ -1,0 +1,11 @@
+<p>people works!</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit(model)" autocomplete="off">
+    <formly-form
+        [form]="form"
+        [model]="model"
+        [fields]="fields"
+        [options]="options"
+    ></formly-form>
+    <button type="submit">Submit</button>
+</form>

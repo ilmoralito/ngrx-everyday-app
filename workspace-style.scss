@@ -1,0 +1,96 @@
+/* Customizations to the designer theme should be defined here */
+
+// customs tags styles
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+// custom misc styles
+*:focus {
+  box-shadow: none !important;
+}
+
+// overrides to the components designs
+p-breadcrumb homeicon {
+  display: none !important;
+}
+
+.p-paginator-element {
+  color: $primaryColor !important;
+  background-color: white !important;
+}
+
+.p-inputtext,
+.p-dropdown {
+  width: 100%;
+}
+
+.p-button-link {
+  color: $primaryColor !important;
+}
+
+.material-icons-outlined {
+  color: $iconColor;
+}
+
+a.material-icons-outlined {
+  text-decoration: none;
+}
+
+.context-padding {
+  padding: 8px 12px;
+}
+
+// cstm
+.cstm_primary_button,
+.p-datepicker-trigger {
+  background-color: $primaryColor;
+  color: white;
+  border: none;
+
+  &:hover {
+    background-color: $primaryColorHoverState !important;
+  }
+}
+
+.cstm_secundary_button {
+  background-color: white;
+  color: $primaryColor !important;
+  border: 2px solid $primaryColor !important;
+
+  &:hover {
+    background-color: $primaryColorHoverState !important;
+    color: white !important;
+  }
+}
+
+.cstm_link_button {
+  font-family: 'Open Sans', sans-serif; // todo: temporal solution
+  border: none;
+  color: $primaryColor;
+  background-color: white;
+  transition: all 0.4s;
+
+  &:hover {
+    cursor: pointer;
+    color: $primaryColorHoverState;
+  }
+}
+
+.p-splitbutton-menubutton {
+  background-color: $primaryColor;
+  border-color: $primaryColor;
+  &:hover {
+    background-color: $primaryColor !important;
+    color: white !important;
+  }
+}
+
+.p-inputswitch .p-inputswitch-slider {
+  background-color: $primaryColor !important;
+
+  &:hover {
+    background-color: $primaryColorHoverState !important;
+  }
+}

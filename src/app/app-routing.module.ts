@@ -85,9 +85,46 @@ const routes: Routes = [
       ),
   },
   {
-    path: "",
+    path: "login",
     loadChildren: () =>
       import("./project/login/login.module").then((m) => m.LoginModule),
+  },
+  {
+    path: "books",
+    loadChildren: () =>
+      import("./project/books/books.module").then((m) => m.BooksModule),
+  },
+  {
+    path: "members",
+    loadChildren: () =>
+      import("./project/members/members.module").then((m) => m.MembersModule),
+  },
+  {
+    path: "people",
+    loadChildren: () =>
+      import("./project/people/people.module").then((m) => m.PeopleModule),
+  },
+  {
+    path: "staff",
+    loadChildren: () =>
+      import("./project/staff/staff.module").then((m) => m.StaffModule),
+  },
+  {
+    path: "owners",
+    loadChildren: () =>
+      import("./project/owner/owner.module").then((m) => m.OwnerModule),
+  },
+  {
+    path: "types",
+    loadChildren: () =>
+      import("./project/type/type.module").then((m) => m.TypeModule),
+  },
+  {
+    path: "",
+    loadChildren: () =>
+      import("./project/new-login/new-login.module").then(
+        (m) => m.NewLoginModule,
+      ),
   },
 ];
 

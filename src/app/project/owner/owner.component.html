@@ -1,0 +1,88 @@
+<p *appFirst>owner works!</p>
+
+<div style="padding: 10px; border: 1px dashed white; margin: 10px">
+    <button appOnline appTrack="One">One</button>
+    <button appOnline appTrack="Two">Two</button>
+    <button appOnline appTrack="three">Three</button>
+</div>
+
+<div appBorderDotted>
+    <input
+        type="text"
+        #filter
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        (keydown.enter)="add($event)"
+    />
+    <ng-container *ngIf="show">
+        <app-owner-filter
+            [filter]="filter.value"
+            [owners]="owners"
+            (delete)="onDelete($event)"
+        />
+    </ng-container>
+</div>
+
+<div style="padding: 10px; border: 1px dashed white; margin: 10px">
+    <ng-template #templ>Content inside a template</ng-template>
+</div>
+
+<div style="padding: 10px; border: 1px dashed white; margin: 10px">
+    <ng-template #foo let-inner="message">
+        <h1>{{ inner }}</h1>
+    </ng-template>
+    <div
+        [ngTemplateOutlet]="foo"
+        [ngTemplateOutletContext]="{ message: 'Abigail' }"
+    ></div>
+    <div
+        [ngTemplateOutlet]="foo"
+        [ngTemplateOutletContext]="{ message: 'Marya' }"
+    ></div>
+    <div
+        [ngTemplateOutlet]="foo"
+        [ngTemplateOutletContext]="{ message: 'Deyanira' }"
+    ></div>
+    <div
+        [ngTemplateOutlet]="foo"
+        [ngTemplateOutletContext]="{ message: 'Keyra' }"
+    ></div>
+    <div
+        [ngTemplateOutlet]="foo"
+        [ngTemplateOutletContext]="{ message: 'Aura' }"
+    ></div>
+</div>
+
+<app-owner-detail></app-owner-detail>
+
+<input type="text" appRainbow />
+
+<table>
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Option</th>
+            <th>Active</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let owner of owners">
+            <td>{{ owner.firstName }}</td>
+            <td>{{ owner.lastName }}</td>
+            <td>{{ owner.email }}</td>
+            <td>{{ owner.settings.option }}</td>
+            <td>{{ owner.active }}</td>
+            <td>
+                <button
+                    (click)="selectOwner(owner)"
+                    appPrimaryButton="owner-edit"
+                >
+                    Edit
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+table {
+    border-collapse: collapse;
+    border: 1px solid white;
+}
+
+th {
+    text-align: left;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid white;
+}
+
+.luffy {
+    text-decoration: underline;
+}
+
+button:disabled {
+    background-color: gray !important;
+}

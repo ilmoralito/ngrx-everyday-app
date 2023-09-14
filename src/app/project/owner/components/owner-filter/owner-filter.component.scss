@@ -1,0 +1,21 @@
+:host {
+    position: absolute;
+    width: 500px;
+    top: 30px;
+    left: 0;
+    background-color: goldenrod;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul li {
+    padding: 10px;
+}
+
+ul li:nth-child(odd) {
+    border-bottom: 1px solid gray;
+}

@@ -1,0 +1,34 @@
+{{filter}}
+
+<ul>
+    <li *ngFor="let owner of owners">
+        <div style="display: flex; justify-content: space-between">
+            <span>
+                <ng-container *ngIf="editings.includes(owner.id)">
+                    <app-owner-inline-edit [model]="owner" (confirm)="onConfirm($event)" />
+                </ng-container>
+                <ng-container *ngIf="!editings.includes(owner.id)">
+                    {{ owner.firstName }} {{ owner.lastName }}
+                </ng-container>
+            </span>
+            <span style="display: flex; gap: 4px">
+                <button
+                    (click)="onEdit(owner.id)"
+                    *ngIf="!editings.includes(owner.id)"
+                >
+                    Edit
+                </button>
+                <ng-container *ngIf="editings.includes(owner.id)">
+                    <!-- <button (click)="onConfirm(owner.id)">Confirm</button> -->
+                    <button (click)="onCancel(owner.id)">Cancel</button>
+                </ng-container>
+                <button
+                    (click)="onDelete(owner.id)"
+                    [disabled]="editings.includes(owner.id)"
+                >
+                    Delete
+                </button>
+            </span>
+        </div>
+    </li>
+</ul>
