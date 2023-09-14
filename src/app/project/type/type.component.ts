@@ -34,7 +34,7 @@ export class TypeComponent {
     this.show = true;
   }
 
-  onEnter($event: Event) {
+  onAdd($event: Event) {
     const target = $event.target as HTMLInputElement;
     const value = target.value;
 
@@ -52,6 +52,12 @@ export class TypeComponent {
     // sort alphabetically
     this.types = [...this.types, type].sort((a, b) =>
       a.displayName.localeCompare(b.displayName),
+    );
+  }
+
+  onUpdate(type: Type) {
+    this.types = this.types.map((t) =>
+      t.id === type.id ? { ...type } : { ...t },
     );
   }
 

@@ -10,14 +10,32 @@ import { Type } from "../../state/type.mode";
 
 @Component({
   selector: "app-type-filter",
-  template: `<ul>
+  template: ` <ul>
     <li *ngFor="let type of filteredTypes">
       <div style="display: flex; justify-content: space-between;">
-        <span>{{ type.displayName }}</span>
+        <span>
+          <ng-container *ngIf="editing.includes(type.id); else elseBock">
+            <app-type-inline-edit
+              [type]="getTypeById(type.id)"
+              (confirm)="onConfirm($event)"
+            ></app-type-inline-edit>
+          </ng-container>
+          <ng-template #elseBock>{{ type.displayName }}</ng-template>
+        </span>
         <span>
           <div style="display: flex; gap: 2px;">
-            <button (click)="onEdit(type.id)">Edit</button>
-            <button (click)="onDelete(type.id)">Delete</button>
+            <ng-container *ngIf="editing.includes(type.id)">
+              <button (click)="onCancel(type.id)">Cancel</button>
+            </ng-container>
+            <ng-container *ngIf="!editing.includes(type.id)">
+              <button (click)="onEdit(type.id)">Edit</button>
+            </ng-container>
+            <button
+              (click)="onDelete(type.id)"
+              [disabled]="editing.includes(type.id)"
+            >
+              Delete
+            </button>
           </div>
         </span>
       </div>
@@ -47,8 +65,10 @@ export class TypeFilterComponent implements OnChanges {
   @Input() types: Type[] = [];
 
   @Output() delete = new EventEmitter<string>();
+  @Output() update = new EventEmitter<Type>();
 
   filteredTypes: Type[] = [];
+  editing: string[] = [];
 
   // TODO: temporal solution. move to a pipe
   ngOnChanges(changes: SimpleChanges) {
@@ -78,8 +98,21 @@ export class TypeFilterComponent implements OnChanges {
     }
   }
 
+  getTypeById(id: string) {
+    return this.filteredTypes.find((type) => type.id === id)!;
+  }
+
   onEdit(id: string) {
-    console.log(id);
+    this.editing = [...this.editing, id];
+  }
+
+  onCancel(id: string) {
+    this.editing = this.editing.filter((value) => value !== id);
+  }
+
+  onConfirm(type: Type) {
+    this.update.emit(type);
+    this.onCancel(type.id);
   }
 
   onDelete(id: string) {
