@@ -38,7 +38,7 @@ export class TypeInlineEditComponent {
 
     this.confirm.emit({
       ...this.type,
-      name: value.split(" ").join("-"),
+      name: value.toLowerCase().split(" ").join("-"),
       displayName: value,
     });
   }
