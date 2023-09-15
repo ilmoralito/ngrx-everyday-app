@@ -70,6 +70,7 @@ export class TypeFilterComponent implements OnChanges {
 
   @Output() select = new EventEmitter<Type>();
   @Output() update = new EventEmitter<Type>();
+  @Output() reset = new EventEmitter<void>();
   @Output() delete = new EventEmitter<string>();
 
   filteredTypes: Type[] = [];
@@ -89,7 +90,7 @@ export class TypeFilterComponent implements OnChanges {
 
       if (property === "filter") {
         const filter = changes[property].currentValue;
-
+        console.log(filter);
         if (!filter) {
           this.filteredTypes = [...this.types];
         }

@@ -84,14 +84,22 @@ export class TypeComponent {
     );
   }
 
+  onReset() {
+    if (!this.selectedType) {
+      return;
+    }
+
+    this.selectedType = null;
+    this.filter.nativeElement.value = "";
+  }
+
   onDelete(id: string) {
     // remove from type list
     this.types = this.types.filter((t) => t.id !== id);
 
     // if there is a selected type and its deleted then set selected type to null and clean input
     if (this.selectedType && this.selectedType.id === id) {
-      this.selectedType = null;
-      this.filter.nativeElement.value = "";
+      this.onReset();
     }
   }
 }
