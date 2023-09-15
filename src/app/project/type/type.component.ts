@@ -27,6 +27,7 @@ export class TypeComponent {
     { id: "11", name: "type-11", displayName: "Type 11" },
   ];
   show = false;
+  selectedType: Type | null = null;
 
   @ViewChild("filter") filter!: ElementRef<HTMLInputElement>;
 
@@ -63,9 +64,10 @@ export class TypeComponent {
     );
   }
 
-  onSelect(displayName: string) {
+  onSelect(type: Type) {
     this.cdRef.detach();
-    this.filter.nativeElement.value = displayName;
+    this.selectedType = type;
+    this.filter.nativeElement.value = type.displayName;
     this.cdRef.reattach();
   }
 
@@ -76,6 +78,13 @@ export class TypeComponent {
   }
 
   onDelete(id: string) {
+    // remove from type list
     this.types = this.types.filter((t) => t.id !== id);
+
+    // if there is a selected type and its deleted then set selected type to null and clean input
+    if (this.selectedType && this.selectedType.id === id) {
+      this.selectedType = null;
+      this.filter.nativeElement.value = "";
+    }
   }
 }
