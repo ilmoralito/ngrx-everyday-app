@@ -1,14 +1,17 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from "@angular/core";
 import { Type } from "../../state/type.mode";
 
 @Component({
   selector: "app-type-inline-edit",
   template: `
-    <input
-      type="text"
-      [(ngModel)]="type.displayName"
-      (keydown.enter)="onEnter()"
-    />
+    <input #node (keydown.enter)="onEnter()" [value]="type.displayName" />
   `,
   styles: [],
 })
@@ -24,7 +27,19 @@ export class TypeInlineEditComponent {
 
   @Output() confirm = new EventEmitter<Type>();
 
+  @ViewChild("node") node!: ElementRef<HTMLInputElement>;
+
   onEnter() {
-    this.confirm.emit(this.type);
+    const value = this.node.nativeElement.value;
+
+    if (!value) {
+      return;
+    }
+
+    this.confirm.emit({
+      ...this.type,
+      name: value.split(" ").join("-"),
+      displayName: value,
+    });
   }
 }
