@@ -72,6 +72,13 @@ export class TypeComponent {
   }
 
   onUpdate(type: Type) {
+    // sync selected type
+    this.selectedType = type;
+
+    // sync input filter
+    this.filter.nativeElement.value = type.displayName;
+
+    // sync types
     this.types = this.types.map((t) =>
       t.id === type.id ? { ...type } : { ...t },
     );
