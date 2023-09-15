@@ -14,6 +14,7 @@ import { Type } from "./state/type.mode";
 })
 export class TypeComponent {
   types: Type[] = [
+    { id: "0", name: "type-0", displayName: "Type 0" },
     { id: "1", name: "type-1", displayName: "Type 1" },
     { id: "2", name: "type-2", displayName: "Type 2" },
     { id: "3", name: "type-3", displayName: "Type 3" },
@@ -37,7 +38,7 @@ export class TypeComponent {
     this.filter.nativeElement.blur();
   }
 
-  constructor(private readonly cdRef: ChangeDetectorRef) {}
+  constructor() {}
 
   onFocus() {
     this.show = true;
@@ -58,6 +59,14 @@ export class TypeComponent {
       displayName: value,
     };
 
+    // TODO: validate type is repeated
+    const exists = !!this.types.find((t) => t.name === type.name);
+
+    if (exists) {
+      console.info("Type already exists");
+      return;
+    }
+
     // sort alphabetically
     this.types = [...this.types, type].sort((a, b) =>
       a.displayName.localeCompare(b.displayName),
@@ -65,18 +74,16 @@ export class TypeComponent {
   }
 
   onSelect(type: Type) {
-    this.cdRef.detach();
     this.selectedType = type;
     this.filter.nativeElement.value = type.displayName;
-    this.cdRef.reattach();
+    this.show = false;
   }
 
   onUpdate(type: Type) {
-    // sync selected type
-    this.selectedType = type;
-
-    // sync input filter
-    this.filter.nativeElement.value = type.displayName;
+    if (this.selectedType && type.id === this.selectedType.id) {
+      this.selectedType = type;
+      this.filter.nativeElement.value = type.displayName;
+    }
 
     // sync types
     this.types = this.types.map((t) =>

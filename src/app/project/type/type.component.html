@@ -12,6 +12,7 @@
     <app-type-filter
         [filter]="filter.value"
         [types]="types"
+        [selectedType]="selectedType"
         (select)="onSelect($event)"
         (update)="onUpdate($event)"
         (reset)="onReset()"

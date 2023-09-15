@@ -21,7 +21,16 @@ import { Type } from "../../state/type.mode";
             ></app-type-inline-edit>
           </ng-container>
           <ng-template #elseBock>
-            <span (click)="onSelect(type)" style="cursor: pointer">
+            <span
+              (click)="onSelect(type)"
+              style="cursor: pointer"
+              [ngStyle]="{
+                'font-weight':
+                  selectedType && selectedType.id === type.id
+                    ? 'bold'
+                    : 'normal'
+              }"
+            >
               {{ type.displayName }}
             </span>
           </ng-template>
@@ -67,6 +76,7 @@ import { Type } from "../../state/type.mode";
 export class TypeFilterComponent implements OnChanges {
   @Input() filter = "";
   @Input() types: Type[] = [];
+  @Input() selectedType!: Type | null;
 
   @Output() select = new EventEmitter<Type>();
   @Output() update = new EventEmitter<Type>();
@@ -78,9 +88,14 @@ export class TypeFilterComponent implements OnChanges {
 
   // TODO: temporal solution. move to a pipe
   ngOnChanges(changes: SimpleChanges) {
+    const selectedTypeValue =
+      Object.keys(changes).includes("selectedType") &&
+      changes["selectedType"].currentValue;
+
     for (let property in changes) {
       if (property === "types") {
         const types = changes[property].currentValue;
+
         this.filteredTypes = types.filter((type: Type) => {
           return type.displayName
             .toLowerCase()
@@ -88,9 +103,14 @@ export class TypeFilterComponent implements OnChanges {
         });
       }
 
-      if (property === "filter") {
+      if (property === "selectedType") {
+        this.filteredTypes = [...this.types];
+        return;
+      }
+
+      if (property === "filter" && !selectedTypeValue) {
         const filter = changes[property].currentValue;
-        console.log(filter);
+
         if (!filter) {
           this.filteredTypes = [...this.types];
         }
