@@ -21,7 +21,7 @@ import { Type } from "../../state/type.mode";
             ></app-type-inline-edit>
           </ng-container>
           <ng-template #elseBock>
-            <span (click)="onSelect(type.name)" style="cursor: pointer">
+            <span (click)="onSelect(type.displayName)" style="cursor: pointer">
               {{ type.displayName }}
             </span>
           </ng-template>
@@ -107,8 +107,8 @@ export class TypeFilterComponent implements OnChanges {
     return this.filteredTypes.find((type) => type.id === id)!;
   }
 
-  onSelect(name: string) {
-    this.select.emit(name);
+  onSelect(displayName: string) {
+    this.select.emit(displayName);
   }
 
   onEdit(id: string) {

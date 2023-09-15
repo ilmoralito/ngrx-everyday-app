@@ -63,9 +63,9 @@ export class TypeComponent {
     );
   }
 
-  onSelect(name: string) {
+  onSelect(displayName: string) {
     this.cdRef.detach();
-    this.filter.nativeElement.value = name;
+    this.filter.nativeElement.value = displayName;
     this.cdRef.reattach();
   }
 
