@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, ViewChild } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  ViewChild,
+} from "@angular/core";
 import { Type } from "./state/type.mode";
 
 @Component({
@@ -30,6 +36,8 @@ export class TypeComponent {
     this.filter.nativeElement.blur();
   }
 
+  constructor(private readonly cdRef: ChangeDetectorRef) {}
+
   onFocus() {
     this.show = true;
   }
@@ -53,6 +61,12 @@ export class TypeComponent {
     this.types = [...this.types, type].sort((a, b) =>
       a.displayName.localeCompare(b.displayName),
     );
+  }
+
+  onSelect(name: string) {
+    this.cdRef.detach();
+    this.filter.nativeElement.value = name;
+    this.cdRef.reattach();
   }
 
   onUpdate(type: Type) {

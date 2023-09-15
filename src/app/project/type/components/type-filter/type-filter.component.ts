@@ -13,15 +13,19 @@ import { Type } from "../../state/type.mode";
   template: ` <ul>
     <li *ngFor="let type of filteredTypes">
       <div style="display: flex; justify-content: space-between;">
-        <span>
+        <ng-container>
           <ng-container *ngIf="editing.includes(type.id); else elseBock">
             <app-type-inline-edit
               [type]="getTypeById(type.id)"
               (confirm)="onConfirm($event)"
             ></app-type-inline-edit>
           </ng-container>
-          <ng-template #elseBock>{{ type.displayName }}</ng-template>
-        </span>
+          <ng-template #elseBock>
+            <span (click)="onSelect(type.name)" style="cursor: pointer">
+              {{ type.displayName }}
+            </span>
+          </ng-template>
+        </ng-container>
         <span>
           <div style="display: flex; gap: 2px;">
             <ng-container *ngIf="editing.includes(type.id)">
@@ -64,8 +68,9 @@ export class TypeFilterComponent implements OnChanges {
   @Input() filter = "";
   @Input() types: Type[] = [];
 
-  @Output() delete = new EventEmitter<string>();
+  @Output() select = new EventEmitter<string>();
   @Output() update = new EventEmitter<Type>();
+  @Output() delete = new EventEmitter<string>();
 
   filteredTypes: Type[] = [];
   editing: string[] = [];
@@ -100,6 +105,10 @@ export class TypeFilterComponent implements OnChanges {
 
   getTypeById(id: string) {
     return this.filteredTypes.find((type) => type.id === id)!;
+  }
+
+  onSelect(name: string) {
+    this.select.emit(name);
   }
 
   onEdit(id: string) {

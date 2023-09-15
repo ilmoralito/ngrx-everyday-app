@@ -10,8 +10,9 @@
         <app-type-filter
             [filter]="filter.value"
             [types]="types"
-            (delete)="onDelete($event)"
+            (select)="onSelect($event)"
             (update)="onUpdate($event)"
+            (delete)="onDelete($event)"
         ></app-type-filter>
     </ng-container>
 </div>
