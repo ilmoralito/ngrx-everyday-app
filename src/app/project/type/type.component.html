@@ -1,21 +1,11 @@
-<pre>{{ selectedType | json }}</pre>
-<div class="container">
-    <input
-        ngModel
-        #filter
-        (focus)="onFocus()"
-        (keydown.enter)="onAdd($event)"
-    />
-    <label (click)="onReset()" *ngIf="selectedType">X</label>
-</div>
-<ng-container *ngIf="show">
-    <app-type-filter
-        [filter]="filter.value"
-        [types]="types"
-        [selectedType]="selectedType"
-        (select)="onSelect($event)"
-        (update)="onUpdate($event)"
-        (reset)="onReset()"
-        (delete)="onDelete($event)"
-    ></app-type-filter>
-</ng-container>
+<p>type list works!</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <formly-form
+        [form]="form"
+        [model]="model"
+        [fields]="fields"
+        [options]="options"
+    ></formly-form>
+    <button type="submit">Submit</button>
+</form>

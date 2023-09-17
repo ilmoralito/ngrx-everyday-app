@@ -86,21 +86,27 @@ export class TypeFilterComponent implements OnChanges {
   filteredTypes: Type[] = [];
   editing: string[] = [];
 
+  private ifOnlyTypePropertyIsProvided(
+    property: string,
+    properties: readonly string[],
+  ) {
+    return (
+      property === "types" &&
+      properties.length === 1 &&
+      properties[0] === "types"
+    );
+  }
+
   // TODO: temporal solution. move to a pipe
   ngOnChanges(changes: SimpleChanges) {
+    const changesProperties = Object.keys(changes);
     const selectedTypeValue =
       Object.keys(changes).includes("selectedType") &&
       changes["selectedType"].currentValue;
 
     for (let property in changes) {
-      if (property === "types") {
-        const types = changes[property].currentValue;
-
-        this.filteredTypes = types.filter((type: Type) => {
-          return type.displayName
-            .toLowerCase()
-            .includes(this.filter.toLowerCase());
-        });
+      if (this.ifOnlyTypePropertyIsProvided(property, changesProperties)) {
+        this.filteredTypes = [...this.types];
       }
 
       if (property === "selectedType") {
@@ -113,13 +119,12 @@ export class TypeFilterComponent implements OnChanges {
 
         if (!filter) {
           this.filteredTypes = [...this.types];
+          return;
         }
 
-        if (filter) {
-          this.filteredTypes = this.types.filter((t) =>
-            t.displayName.toLowerCase().includes(filter.toLowerCase()),
-          );
-        }
+        this.filteredTypes = this.types.filter((type) =>
+          type.displayName.toLowerCase().includes(filter.toLowerCase()),
+        );
       }
     }
   }

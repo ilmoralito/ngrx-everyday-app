@@ -13,16 +13,16 @@ import { MessageService } from "primeng/api";
 import { ToastModule } from "primeng/toast";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { ArrayTypeComponent } from "./project/people/components/formly-custom-types/array.type/array.type.component";
 import { dataCyExtension } from "./project/repos/formly/extension/data-cy.extension";
-import { defaultLabelExtension } from "./project/repos/formly/extension/default-label.extension";
 import { ReposService } from "./project/repos/services/repos/repos.service";
 import { LoggerService } from "./project/services/logger/logger.service";
 import { NewLoggerService } from "./project/services/new-logger/new-logger.service";
+import { emailPattern } from "./project/utils/utils";
 import { CustomInputTypeComponent } from "./shared/shared/formly-custom-types";
 import { FormlyWrapperPanelComponent } from "./shared/shared/formly-custom-wrappers";
 import { counterReducer } from "./state/counter.reducer";
-import { emailPattern } from "./project/utils/utils";
-import { ArrayTypeComponent } from "./project/people/components/formly-custom-types/array.type/array.type.component";
+import { MyTypeComponent } from "./project/type/components/type/type.component";
 // import { AnotherCustomTypeComponent } from './src/app/shared/shared/formly-custom-types/another-custom-type/another-custom-type.component';
 
 export function fieldMatchValidator(control: AbstractControl) {
@@ -62,6 +62,7 @@ export function emailValidator(control: AbstractControl) {
       wrappers: [{ name: "panel", component: FormlyWrapperPanelComponent }],
       types: [
         { name: "custom-input", component: CustomInputTypeComponent },
+        { name: "filter-type", component: MyTypeComponent },
         { name: "array", component: ArrayTypeComponent },
       ],
       validators: [
