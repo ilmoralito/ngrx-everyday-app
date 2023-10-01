@@ -1,5 +1,13 @@
 <h2>Users</h2>
 
+<p *ngIf="loading; else elseBlock">Loading...</p>
+<ng-template #elseBlock>
+	<div class="input-field">
+		<input placeholder="  Search" (keyup)="onKeyUp($event)" #input />
+	</div>
+	<app-user-list *ngFor="let user of userList" [user]="user"></app-user-list>
+</ng-template>
+
 <button (click)="onAdd()">Add user</button>
 
 <ul>

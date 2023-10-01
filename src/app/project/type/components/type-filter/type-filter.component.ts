@@ -23,7 +23,7 @@ import { Type } from "../../state/type.mode";
           <ng-template #elseBock>
             <span
               (click)="onSelect(type)"
-              style="cursor: pointer"
+              class="type-display-name"
               [ngStyle]="{
                 'font-weight':
                   selectedType && selectedType.id === type.id
@@ -57,8 +57,11 @@ import { Type } from "../../state/type.mode";
   styles: [
     `
       :host {
+        position: absolute;
         background-color: #f5f5f5;
-        display: block;
+        top: 23px;
+        right: 0;
+        left: 0;
       }
 
       ul {
@@ -69,6 +72,15 @@ import { Type } from "../../state/type.mode";
 
       ul li {
         padding: 10px;
+      }
+
+      li:hover {
+        background-color: #ddd;
+      }
+
+      .type-display-name {
+        cursor: pointer;
+        width: 100%;
       }
     `,
   ],

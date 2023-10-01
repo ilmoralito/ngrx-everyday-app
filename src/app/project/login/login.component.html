@@ -1,8 +1,49 @@
 <ng-container *ngIf="userProfile$ | async as userProfile">
 	<pre>{{ userProfile | json }}</pre>
-
 	<button (click)="logout()">Logout</button>
 </ng-container>
+
+<fieldset>
+	<legend>form control</legend>
+	<div>
+		<button type="button" (click)="onUpdateName('abc')">Update</button>
+		<button type="button" (click)="onUpdateName('xml')">Update</button>
+		<button type="button" (click)="onUpdateName('xyz')">Update</button>
+	</div>
+	<div>
+		<label for="name">Name: </label>
+		<input id="name" type="text" #input [formControl]="name" />
+		<p>Value: {{ name.value }}</p>
+		<p>Value: {{ input.value }}</p>
+		<p>Value: {{ hiddenName.value }}</p>
+	</div>
+</fieldset>
+
+<h1>My First Attribute Directive</h1>
+
+<h2>Pick a highlight color</h2>
+<div>
+	<input type="radio" name="colors" (click)="color = 'lightgreen'" />Green
+	<input type="radio" name="colors" (click)="color = 'yellow'" />Yellow
+	<input type="radio" name="colors" (click)="color = 'cyan'" />Cyan
+</div>
+
+<p [appMyHighlight]="color">Highlight me!</p>
+
+<div class="wrapper">
+	<button type="button" appDropdown class="dropdown-button">Menu</button>
+	<div class="dropdown">
+		<a href="https://medium.com/@kylerjohnson26" class="dropdown-item">
+			Find me on Medium
+		</a>
+		<a href="https://twitter.com/KylerJohnson26" class="dropdown-item">
+			Find me on Twitter
+		</a>
+		<a href="https://github.com/KylerJohnson26" class="dropdown-item">
+			Find me on Github
+		</a>
+	</div>
+</div>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit(model)" autocomplete="off">
 	<formly-form

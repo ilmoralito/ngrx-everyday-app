@@ -5,7 +5,7 @@ import { Type } from "../../state/type.mode";
 @Component({
   selector: "app-my-type",
   template: `
-    <div class="container">
+    <div class="container" #container>
       <input
         #input
         (focus)="onFocus()"
@@ -13,18 +13,18 @@ import { Type } from "../../state/type.mode";
         (keydown.enter)="onAdd($event)"
       />
       <label (click)="onReset()" *ngIf="selectedType">X</label>
+      <ng-container *ngIf="show">
+        <app-type-filter
+          [filter]="formControl.value"
+          [types]="types"
+          [selectedType]="selectedType"
+          (select)="onSelect($event)"
+          (update)="onUpdate($event)"
+          (reset)="onReset()"
+          (delete)="onDelete($event)"
+        ></app-type-filter>
+      </ng-container>
     </div>
-    <ng-container *ngIf="show">
-      <app-type-filter
-        [filter]="formControl.value"
-        [types]="types"
-        [selectedType]="selectedType"
-        (select)="onSelect($event)"
-        (update)="onUpdate($event)"
-        (reset)="onReset()"
-        (delete)="onDelete($event)"
-      ></app-type-filter>
-    </ng-container>
   `,
   styles: [
     `
@@ -61,6 +61,7 @@ export class MyTypeComponent extends FieldType<FieldTypeConfig> {
   show = false;
   selectedType: Type | null = null;
 
+  @ViewChild("container") container!: ElementRef<HTMLDivElement>;
   @ViewChild("input") input!: ElementRef<HTMLInputElement>;
 
   @HostListener("document:keydown.escape", ["$event"])
@@ -68,6 +69,11 @@ export class MyTypeComponent extends FieldType<FieldTypeConfig> {
     this.show = false;
     this.formControl.setValue("");
     this.input.nativeElement.blur();
+  }
+
+  @HostListener("document:click", ["$event.target"])
+  onClickDocument(element: HTMLElement) {
+    console.log(this.container.nativeElement.contains(element));
   }
 
   private typeExists(name: string) {

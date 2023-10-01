@@ -1,0 +1,54 @@
+.dropdown-button {
+  background: #0288d1;
+  border: 1px solid #0288d1;
+  border-radius: 0.25em;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5em;
+  outline: 0;
+}
+
+.dropdown {
+  background-color: #0288d1;
+  border: none;
+  border-radius: 0 0.25em 0.25em 0.25em;
+  display: none;
+  width: 40%;
+}
+
+.dropdown-item {
+  color: white;
+  border-bottom: 1px solid white;
+  display: block;
+  padding: 0.5em 0;
+  text-align: center;
+  text-decoration: none;
+}
+
+.dropdown-item:first-child {
+  border-top: 1px solid white;
+  border-radius: 0 0.25em 0 0;
+}
+
+.dropdown-item:last-child {
+  border-radius: 0 0 0.25em 0.25em;
+}
+
+.dropdown-item:hover {
+  background-color: magenta;
+}
+
+/*
+ Below is the only CSS necessary to make this example work. The dropdown directive will add or remove the .open class when the click event is emitted.
+ 
+ Note: By default, the display property of an element with the .dropdown class is set to none.
+ When the dropdown directive applies the .open class to the dropdown button, the below CSS will set the display property of the sibling div with a class of .dropdown to block, making it visible. 
+*/
+
+.open {
+  border-radius: 0.25em 0.25em 0 0;
+}
+
+.open + .dropdown {
+  display: block;
+}

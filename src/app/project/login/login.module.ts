@@ -8,9 +8,11 @@ import { LoginEffects } from "./state/login.effects";
 import { SharedModule } from "src/app/shared/shared/shared.module";
 import { StoreModule } from "@ngrx/store";
 import { name, reducer } from "./state/login.reducer";
+import { MyHighlightDirective } from "./directives/my-highlight.directive";
+import { DropdownDirective } from "./directives/dropdown.directive";
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, MyHighlightDirective, DropdownDirective],
   imports: [
     CommonModule,
     SharedModule,

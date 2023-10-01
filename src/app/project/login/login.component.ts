@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { Component, ElementRef, ViewChild } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
 import { Credential } from "./state/credential.model";
 import { FormlyFieldConfig, FormlyFormOptions } from "@ngx-formly/core";
 import { Store } from "@ngrx/store";
@@ -17,6 +17,20 @@ import { formlyInput } from "src/app/shared/shared/formly-utils/formly-input";
 export class LoginComponent {
   userProfile$!: Observable<UserProfile | null>;
   loading$!: Observable<boolean>;
+
+  color = "yellow";
+
+  //
+  @ViewChild("input") input!: ElementRef<HTMLInputElement>;
+
+  name = new FormControl();
+  hiddenName = new FormControl();
+
+  onUpdateName(value: string) {
+    this.name.setValue(value);
+    this.hiddenName.setValue(value);
+  }
+  //
 
   form = new FormGroup({});
   model: Credential = { username: "", password: "" };

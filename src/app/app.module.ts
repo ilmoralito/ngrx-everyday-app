@@ -23,6 +23,7 @@ import { CustomInputTypeComponent } from "./shared/shared/formly-custom-types";
 import { FormlyWrapperPanelComponent } from "./shared/shared/formly-custom-wrappers";
 import { counterReducer } from "./state/counter.reducer";
 import { MyTypeComponent } from "./project/type/components/type/type.component";
+import { FilterPipe } from './project/project-list/pipes/filter.pipe';
 // import { AnotherCustomTypeComponent } from './src/app/shared/shared/formly-custom-types/another-custom-type/another-custom-type.component';
 
 export function fieldMatchValidator(control: AbstractControl) {
@@ -48,7 +49,7 @@ export function emailValidator(control: AbstractControl) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FilterPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
